@@ -49,6 +49,9 @@ Compared to the "strict" level of guard, enabling the "highest" level of guard d
 ## Mixin Template Library
 Mixin Template Library is an header-only library and is designed to be easy to use, have no security vulnerability and efficient.
 
+### Requirements
+Mixin Template Library requires C++ 20, and is tested only on the MSVC compiler.
+
 ### Features
 - Compile time string encryption (run-time decryption)
 - Concepts
