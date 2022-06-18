@@ -72,5 +72,5 @@ Mixin Template Library requires C++ 20, and is tested only on the MSVC compiler.
 - Detect any debugger based on Windows debugging system attached to this process. (Only available on x64 platform)
 - Store values in binary format to a file or read binary values from a file and convert them to a specified type (requires values to have names)
 - Brings down the system in a controlled manner. (BSOD but not active instantly, it is not considered as a virus by any anti-virus software)
-- Launch Mixin-Service with a GUI request with Chinese, requesting elevated privileges when possible (need to define __mixin_link_comctl32__ macro to link the required libraries)
+- Launch Mixin-Service with a GUI request with Chinese, requesting elevated privileges when possible (need to define ____mixin_link_comctl32____ macro to link the required libraries)
 - Access to local processor and enables you to query basic information of local processors.
