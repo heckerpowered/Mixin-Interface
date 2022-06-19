@@ -115,6 +115,4 @@ RegOpenKeyExA(HKEY_LOCAL_MACHINE, "SYSTEM\\CurrentControlSet\\Services\\heckerpo
 
 auto file_mapping = CreateFileMappingA(INVALID_HANDLE_VALUE, NULL, PAGE_READWRITE, 0, 4096, "Mixin-Mapping");
 mixins::mapping_handle mapping_handle { MapViewOfFile(file_mapping, FILE_MAP_ALL_ACCESS, 0, 0, 4096) };
-
-
 ```` 
