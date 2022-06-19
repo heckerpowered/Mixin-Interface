@@ -57,7 +57,7 @@ Mixin Template Library requires C++ 20, and is tested only on the MSVC compiler.
 - [Compile time string encryption (run-time decryption)](#E-CompileTimeStringEncryption)
 - [Concepts](#E-Concepts)
 - [Format error message](#E-FormatErrorMessage)
-- Automatic management of Windows handles, works similarly to "unique_ptr".
+- [Automatic management of Windows handles, works similarly to "unique_ptr"](#E-UniqueHandle)
 - Compile time random generator.
 - Compile time string (Not complete yet)
 - Base type to string conversion (supports bool and some container)
@@ -82,11 +82,6 @@ Mixin Template Library requires C++ 20, and is tested only on the MSVC compiler.
 mixins::println(__xor_string("Literal"));
 ````
 
-<a name="E-FormatErrorMessage">Format error messsage</a>
-```` 
-mixins::println(mixins::last_error());
-```` 
-
 <a name="E-Concepts">Concepts</a>
 ```` 
 template<mixins::container container_t> // Accept any container type
@@ -94,4 +89,32 @@ constexpr container_t::size_type size(container_t const& container) noexcept
 {
   return container.size();
 }
+```` 
+
+<a name="E-FormatErrorMessage">Format error messsage</a>
+```` 
+mixins::println(mixins::last_error());
+```` 
+
+<a name="E-UniqueHandle">Automatic management of Windows handles</a>
+> works similarly to "unique_ptr"
+````
+mixins::handle mutex_handle{ CreateMutexA(nullptr, false, "Mixin-Mutex") };
+
+//
+// -1 or -2 is not considered an invalid handle in process_handle, process_handle can represent both process or thread handles.
+//
+mixins::process_handle process_handle{ GetCurrentProcess() };
+mixins::process_handle process_handle{ GetCurrentThread() };
+
+mixins::actx_handle actx_handle;
+GetCurrentActCtx(&actx_handle);
+
+mixins::reg_handle reg_handle;
+RegOpenKeyExA(HKEY_LOCAL_MACHINE, "SYSTEM\\CurrentControlSet\\Services\\heckerpowered.mixin", 0, KEY_READ, &reg_handle);
+
+auto file_mapping = CreateFileMappingA(INVALID_HANDLE_VALUE, NULL, PAGE_READWRITE, 0, 4096, "Mixin-Mapping");
+mixins::mapping_handle mapping_handle { MapViewOfFile(file_mapping, FILE_MAP_ALL_ACCESS, 0, 0, 4096) };
+
+
 ```` 
