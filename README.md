@@ -126,6 +126,7 @@ mixins::println(mixins::random_generator<0>::value);
 <a name="E-CompileTimeString">Compile time string</a>
 ```` 
 > This feature is not yet fully implemented
+
 ```` 
 mixins::println(\_\_literal("Literal"));
 ```` 
