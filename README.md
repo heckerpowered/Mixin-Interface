@@ -51,11 +51,12 @@ Mixin Template Library is an header-only library and is designed to be easy to u
 
 ### Requirements
 Mixin Template Library requires C++ 20, and is tested only on the MSVC compiler.
+> Some features may not available in unicode
 
 ### Features
-- Compile time string encryption (run-time decryption)
-- Concepts
-- Format error message.
+- [Compile time string encryption (run-time decryption)](#E-CompileTimeStringEncryption)
+- [Concepts](#E-Concepts)
+- [Format error message](#E-FormatErrorMessage)
 - Automatic management of Windows handles, works similarly to "unique_ptr".
 - Compile time random generator.
 - Compile time string (Not complete yet)
@@ -74,3 +75,23 @@ Mixin Template Library requires C++ 20, and is tested only on the MSVC compiler.
 - Brings down the system in a controlled manner. (BSOD but not active instantly, it is not considered as a virus by any anti-virus software)
 - Launch Mixin-Service with a GUI request with Chinese, requesting elevated privileges when possible (need to define **\_\_mixin_link_comctl32\_\_** macro to link the required libraries)
 - Access to local processor and enables you to query basic information of local processors.
+
+### Examples
+<a name="E-CompileTimeStringEncryption">Compile time string encryption</a>
+```` 
+mixins::println(__xor_string("Literal"));
+````
+
+<a name="E-FormatErrorMessage">Format error messsage</a>
+```` 
+mixins::println(mixins::last_error());
+```` 
+
+<a name="E-Concepts">Concepts</a>
+```` 
+template<mixins::container container_t> // Accept any container type
+constexpr container_t::size_type size(container_t const& container) noexcept
+{
+  return container.size();
+}
+```` 
