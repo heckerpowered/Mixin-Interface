@@ -60,7 +60,7 @@ Mixin Template Library requires C++ 20, and is tested only on the MSVC compiler.
 - [Automatic management of Windows handles, works similarly to "unique_ptr"](#E-UniqueHandle)
 - [Compile time random generator](#E-CompileTimeRandomGenerator)
 - [Compile time string (Not complete yet)](#E-CompileTimeString)
-- Base type to string conversion (supports bool and some container)
+- [Base type to string conversion (supports bool and some container)](#E-ToString)
 - Convert integer to string with hex format.
 - Efficient string concatenation (60x faster than stringstream string concatenation)
 - Convert multiple values to strings and concatenate
@@ -128,4 +128,15 @@ mixins::println(mixins::random_generator<0>::value);
 
 ```` 
 mixins::println(__literal("Literal"));
+```` 
+***
+<a name="#E-ToString">Base type to string conversion</a>
+> This feature support convert standard container to string.
+> See concept container, the only exception is string, string is not considered a container by mixins::to_string function.
+> String value in the container will be quoted.
+```` 
+std::vector<int> v{1, 2, 3, 4};
+auto result = mixins::to_string(v); // [1,2,3,4]
+std::vector<std::string> v{"1", "2", "3", "4"};
+auto result = mixins::to_string(v); // ["1","2","3","4"]
 ```` 
