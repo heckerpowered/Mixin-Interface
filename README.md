@@ -127,5 +127,5 @@ mixins::println(mixins::random_generator<0>::value);
 > This feature is not yet fully implemented
 
 ```` 
-mixins::println(**\_\_literal("Literal")**);
+mixins::println(__literal("Literal"));
 ```` 
