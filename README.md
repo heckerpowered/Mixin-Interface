@@ -64,7 +64,7 @@ Mixin Template Library requires C++ 20, and is tested only on the MSVC compiler.
 - [Convert integer to string with hex format](#E-IntegerToHex)
 - [Efficient string concatenation (60x faster than stringstream string concatenation)](#E-StringConcatenation)
 - [Convert multiple values to strings and concatenate](#E-Concat)
-- Coroutine (generator)
+- [Coroutine](#E-Coroutine)
 - Output string to console (using Win32 Api)
 - Calculate crc32 value (can be a memory location, or a value)
 - [Integrated LazyImporter](https://github.com/JustasMasiulis/lazy_importer)
@@ -157,4 +157,24 @@ mixins::connect("114514", "1919810"); // 1145141919810
 > This feature is expected to be 60x efficient than stringstream.
 ````
 mixins::concat("114514", 1919810); // 1145141919810
+````
+***
+<a name="E-Coroutine">Coroutine</a>
+> This feature is a simple implementation of Coroutine, and may be deprecated once C++23 adds the concurrent library.
+````
+mixins::generator<unsigned> inline coroutine(unsigned value) noexcept
+{
+	co_yield value++;
+	co_yield value++;
+	co_return;
+}
+
+int main()
+{
+	auto generator = coroutine(1);
+	mixins::println(generator()); // 1
+	mixins::println(generator()); // 2
+	mixins::println(generator()); // 2
+	mixins::println(generator()); // Error, undefined behavior
+}
 ````
