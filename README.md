@@ -69,9 +69,9 @@ Mixin Template Library requires C++ 20, and is tested only on the MSVC compiler.
 - [Calculate crc32 value (can be a memory location, or a value)](#E-Crc32)
 - [Integrated LazyImporter](https://github.com/JustasMasiulis/lazy_importer)
 - [Access to local process](#E-Process)
-- Determine current Windows version.
-- Detect any debugger based on Windows debugging system attached to this process. (Only available on x64 platform)
-- Store values in binary format to a file or read binary values from a file and convert them to a specified type (requires values to have names)
+- [Determine current Windows version](#E-WindowsVerison)
+- [Detect any debugger based on Windows debugging system attached to this process. (Only available on x64 platform)](#E-DetectDebugger)
+- [Store values in binary format to a file or read binary values from a file and convert them to a specified type (requires values to have names)](#E-Settings)
 - Brings down the system in a controlled manner. (BSOD but not active instantly, it is not considered as a virus by any anti-virus software)
 - Launch Mixin-Service with a GUI request with Chinese, requesting elevated privileges when possible (need to define **\_\_mixin_link_comctl32\_\_** macro to link the required libraries)
 - Access to local processor and enables you to query basic information of local processors.
@@ -195,6 +195,7 @@ int value = 114514;
 mixins::println(mixins::compute_crc32(&value, sizeof(value))); // 1239593146
 mixins::println(mixins::compute_crc32(value)); // 1239593146
 ````
+***
 <a name="E-Process">Access to local process</a>
 > This example shows only a partial use of this feature
 ````
@@ -202,4 +203,38 @@ for(auto&& process : mixins::process::enumerate())
 {
 	mixins::println(process.name());
 }
+````
+***
+<a name="E-WindowsVerison">Determine current Windows version</a>
+> This feature can also determine if this Windows is a Windows Server.
+````
+mixins::println(mixins::is_windows_xp_or_greater());
+mixins::println(mixins::is_windows_xp_sp1_or_greater());
+mixins::println(mixins::is_windows_xp_sp2_or_greater());
+mixins::println(mixins::is_windows_xp_sp3_or_greater());
+mixins::println(mixins::is_windows_vista_or_greater());
+mixins::println(mixins::is_windows_vista_sp1_or_greater());
+mixins::println(mixins::is_windows_vista_sp2_or_greater());
+mixins::println(mixins::is_windows_7_or_greater());
+mixins::println(mixins::is_windows_7sp1_or_greater());
+mixins::println(mixins::is_windows_8_or_greater());
+mixins::println(mixins::is_windows_81or_greater());
+mixins::println(mixins::is_windows_10_or_greater());
+mixins::println(mixins::is_windows_xp_or_2k());
+mixins::println(mixins::is_windows_server());
+````
+***
+<a name="Detect Debugger">Detect any debugger based on Windows debugging system attached to this process</a>
+> This feature is only enabled on 64-bit platforms.
+> This feature not only detects the user mode debugger, it also detects the kernel debugger attached to the system, even if it is temporarily disconnected for some reason.
+````
+mixins::println(mixins::detect_debugger());
+````
+***
+<a name="E-Settings">Store values in binary format to a file or read binary values from a file and convert them to a specified type</a>
+> You need to assign a name to each stored value
+````
+mixins::setting_manager manager{ "Values" };
+manager.write<int>("Mixin", 114514);
+mixins::println(manager.read<int>("Mixin"));
 ````
