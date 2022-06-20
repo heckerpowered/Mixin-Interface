@@ -65,7 +65,7 @@ Mixin Template Library requires C++ 20, and is tested only on the MSVC compiler.
 - [Efficient string concatenation (60x faster than stringstream string concatenation)](#E-StringConcatenation)
 - [Convert multiple values to strings and concatenate](#E-Concat)
 - [Coroutine](#E-Coroutine)
-- Output string to console (using Win32 Api)
+- [Output string to console (using Win32 Api)](#E-Print)
 - Calculate crc32 value (can be a memory location, or a value)
 - [Integrated LazyImporter](https://github.com/JustasMasiulis/lazy_importer)
 - Access to local process.
@@ -177,4 +177,13 @@ int main()
 	mixins::println(generator()); // 2
 	mixins::println(generator()); // Error, undefined behavior
 }
+````
+***
+<a name="E-Print">Output string to console</a>
+> This feature uses Win32 Api, so it has a high efficiency.
+> This feature will not be deprecated after std::print and std::println are added to the C++23 standard library, any formatting may have security vulnerabilities.
+````
+mixins::print("114514", "1919810");
+````
+mixins::println("114514", "1919810"); // Auto ends line.
 ````
