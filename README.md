@@ -153,7 +153,7 @@ mixins::println(mixins::hex(114514)); // 1BF52
 mixins::connect("114514", "1919810"); // 1145141919810
 ````
 ***
-<a name="E-Concat>Convert multiple values to strings and concatenate</a>
+<a name="E-Concat">Convert multiple values to strings and concatenate</a>
 > This feature is expected to be 60x efficient than stringstream.
 ````
 mixins::concat("114514", 1919810); // 1145141919810
