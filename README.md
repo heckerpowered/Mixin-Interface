@@ -184,6 +184,5 @@ int main()
 > This feature will not be deprecated after std::print and std::println are added to the C++23 standard library, any formatting may have security vulnerabilities.
 ````
 mixins::print("114514", "1919810");
-````
 mixins::println("114514", "1919810"); // Auto ends line.
 ````
