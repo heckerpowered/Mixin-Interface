@@ -72,9 +72,9 @@ Mixin Template Library requires C++ 20, and is tested only on the MSVC compiler.
 - [Determine current Windows version](#E-WindowsVerison)
 - [Detect any debugger based on Windows debugging system attached to this process. (Only available on x64 platform)](#E-DetectDebugger)
 - [Store values in binary format to a file or read binary values from a file and convert them to a specified type (requires values to have names)](#E-Settings)
-- Brings down the system in a controlled manner. (BSOD but not active instantly, it is not considered as a virus by any anti-virus software)
-- Launch Mixin-Service with a GUI request with Chinese, requesting elevated privileges when possible (need to define **\_\_mixin_link_comctl32\_\_** macro to link the required libraries)
-- Access to local processor and enables you to query basic information of local processors.
+- [Brings down the system in a controlled manner (BSOD but not active instantly, it is not considered as a virus by any anti-virus software)](#E-BSOD)
+- [Launch Mixin-Service with a GUI request with Chinese, requesting elevated privileges when possible (need to define **\_\_mixin_link_comctl32\_\_** macro to link the required libraries)](#E-MixinLauncher)
+- [Access to local processor and enables you to query basic information of local processors](#E-Processors)
 
 ### Examples
 <a name="E-CompileTimeStringEncryption">Compile time string encryption</a>
@@ -237,4 +237,30 @@ mixins::println(mixins::detect_debugger());
 mixins::setting_manager manager{ "Values" };
 manager.write<int>("Mixin", 114514);
 mixins::println(manager.read<int>("Mixin"));
+````
+***
+<a name="E-BSOD">Brings down the system in a controlled manner</a>
+> This feature does not take effect immediately, it will brings down the system in a controlled manner after a short delay (uncontrolled).
+> This feature will not be considered as binging by any anti-virus software.
+> This feature requires a valid error code, otherwise it will generate a pop-up and fail to make the system BSOD.
+````
+mixins::bug_check(STATUS_ACCESS_VIOLATION);
+````
+***
+<a name="E-MixinLauncher">Launch Mixin-Service with a GUI request with Chinese</a>
+> This feature need to define **\_\_mixin_link_comctl32\_\_** macro to link the required libraries.
+> If the user chooses to restart with other credentials on the GUI, this feature restarts the current process with elevated privileges and calls std::terminate();
+> This feature will not fail due to insufficient privileges.
+````
+mixins::request_init_mixin();
+````
+***
+<a name="E-Processors">Access to local processor and enables you to query basic information of local processors</a>
+````
+mixins::println("Vendor: ", mixins::processor::vendor()); // e.g. GenuineIntel
+mixins::println("Brand: ", mixins::processor::brand()); // e.g. Genuine Intel(R) CPU 2.80GHz
+for (auto&& feature : mixins::processor::features())
+{
+	mixins::println(mixins::processor::feature_name(feature.first), " ", feature.second);
+}
 ````
