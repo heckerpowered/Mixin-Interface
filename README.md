@@ -66,9 +66,9 @@ Mixin Template Library requires C++ 20, and is tested only on the MSVC compiler.
 - [Convert multiple values to strings and concatenate](#E-Concat)
 - [Coroutine](#E-Coroutine)
 - [Output string to console (using Win32 Api)](#E-Print)
-- Calculate crc32 value (can be a memory location, or a value)
+- [Calculate crc32 value (can be a memory location, or a value)](#E-Crc32)
 - [Integrated LazyImporter](https://github.com/JustasMasiulis/lazy_importer)
-- Access to local process.
+- [Access to local process](#E-Process)
 - Determine current Windows version.
 - Detect any debugger based on Windows debugging system attached to this process. (Only available on x64 platform)
 - Store values in binary format to a file or read binary values from a file and convert them to a specified type (requires values to have names)
@@ -186,4 +186,20 @@ int main()
 ````
 mixins::print("114514", "1919810");
 mixins::println("114514", "1919810"); // Auto ends line.
+````
+***
+<a name="E-Crc32">Calculate crc32 value</a>
+> This feature can accept a memory location and size, or a left value
+````
+int value = 114514;
+mixins::println(mixins::compute_crc32(&value, sizeof(value))); // 1239593146
+mixins::println(mixins::compute_crc32(value)); // 1239593146
+````
+<a name="E-Process">Access to local process</a>
+> This example shows only a partial use of this feature
+````
+for(auto&& process : mixins::process::enumerate())
+{
+	mixins::println(process.name());
+}
 ````
