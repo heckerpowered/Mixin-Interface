@@ -182,6 +182,7 @@ int main()
 <a name="E-Print">Output string to console</a>
 > This feature uses Win32 Api, so it has a high efficiency.
 > This feature will not be deprecated after std::print and std::println are added to the C++23 standard library, any formatting may have security vulnerabilities.
+> Other than that, formatting is a design mistake, so I would never recommend using format, nor would I use it, or add it to my own library.
 ````
 mixins::print("114514", "1919810");
 mixins::println("114514", "1919810"); // Auto ends line.
