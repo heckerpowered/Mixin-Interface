@@ -61,9 +61,9 @@ Mixin Template Library requires C++ 20, and is tested only on the MSVC compiler.
 - [Compile time random generator](#E-CompileTimeRandomGenerator)
 - [Compile time string (Not complete yet)](#E-CompileTimeString)
 - [Base type to string conversion (supports bool and some container)](#E-ToString)
-- Convert integer to string with hex format.
-- Efficient string concatenation (60x faster than stringstream string concatenation)
-- Convert multiple values to strings and concatenate
+- [Convert integer to string with hex format](#E-IntegerToHex)
+- [Efficient string concatenation (60x faster than stringstream string concatenation)](#E-StringConcatenation)
+- [Convert multiple values to strings and concatenate](#E-Concat)
 - Coroutine (generator)
 - Output string to console (using Win32 Api)
 - Calculate crc32 value (can be a memory location, or a value)
@@ -130,7 +130,7 @@ mixins::println(mixins::random_generator<0>::value);
 mixins::println(__literal("Literal"));
 ```` 
 ***
-<a name="#E-ToString">Base type to string conversion</a>
+<a name="E-ToString">Base type to string conversion</a>
 > This feature support convert standard container to string.
 > See concept container, the only exception is string, string is not considered a container by mixins::to_string function.
 > String value in the container will be quoted.
@@ -140,3 +140,21 @@ auto result = mixins::to_string(v); // [1,2,3,4]
 std::vector<std::string> v{"1", "2", "3", "4"};
 auto result = mixins::to_string(v); // ["1","2","3","4"]
 ```` 
+***
+<a name="E-IntegerToHex">Convert integer to string with hex format</a>
+````
+mixins::println(mixins::hex(114514)); // 1BF52
+````
+***
+<a name="E-StringConcatenation">Efficient string concatenation</a>
+> This feature is expected to be 60x efficient than stringstream.
+> Compare to "mixins::concat", this feature can only connect strings.
+````
+mixins::connect("114514", "1919810"); // 1145141919810
+````
+***
+<a name="E-Concat>Convert multiple values to strings and concatenate</a>
+> This feature is expected to be 60x efficient than stringstream.
+````
+mixins::concat("114514", 1919810); // 1145141919810
+````
